@@ -1,0 +1,20 @@
+<ng-container *ngFor="let item of list">
+  <p *ngIf="item | instanceof: B as b" class="b">
+    I'm B with values '{{ b.valueA }}' and '{{ b.valueB }}'.
+    <ng-container *ngIf="item | instanceof: A">I'm also A.</ng-container>
+  </p>
+  <p *ngIf="item | instanceof: C as c" class="c">
+    I'm C with values '{{ c.valueA }}' and '{{ c.valueC }}'.
+    <ng-container *ngIf="item | instanceof: A">I'm also A.</ng-container>
+  </p>
+</ng-container>
+
+<ng-container *ngFor="let item of list; let i=index">
+  <ng-container [instanceofSwitch]="item">
+    <div *instanceofSwitchCase="A as a">{{ i }}. {{ a.valueA }}</div>
+    <!-- Both 'as' and 'let' are possible -->
+    <div *instanceofSwitchCase="B; let b">{{ i }}. {{ b.valueB }}</div>
+    <div *instanceofSwitchCase="C as c">{{ i }}. {{ c.valueC }}</div>
+    <div *instanceofSwitchDefault>{{ i }}. DEFAULT</div>
+  </ng-container>
+</ng-container>
