@@ -38,6 +38,8 @@ class SwitchView<T = unknown> {
       this.create(result);
     } else if (!result && this._created) {
       this.destroy();
+    } else if (result) {
+      this._context.$implicit = this._context.instanceofSwitchCase = result;
     }
   }
 
